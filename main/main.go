@@ -12,14 +12,15 @@ import (
 
 // Level 关卡
 type Level struct {
-	ID       int    `json:"id"`
-	Exp      int    `json:"exp"`
-	Prefab   string `json:"prefab"`
-	SelfID   int    `json:"self"`
-	Soliders []int  `json:"soliders"`
-	BOSS     []int  `json:"boss"`
-	Foods    []int  `json:"foods"`
-	Bombs    []int  `json:"bombs"`
+	ID          int    `json:"id"`
+	Exp         int    `json:"exp"`
+	BossBornExp int    `json:"bossBornExp"`
+	Prefab      string `json:"prefab"`
+	SelfID      int    `json:"self"`
+	Soliders    []int  `json:"soliders"`
+	BOSS        []int  `json:"boss"`
+	Foods       []int  `json:"foods"`
+	Bombs       []int  `json:"bombs"`
 }
 
 var levels = []*Level{}
@@ -115,6 +116,11 @@ func main() {
 						level.Bombs = append(level.Bombs, nid)
 					}
 				}
+
+				bossExp, ok := strconv.Atoi(row[8])
+				debug(ok)
+
+				level.BossBornExp = bossExp
 
 				levels = append(levels, level)
 			}
